@@ -92,7 +92,7 @@ docker pull 192.168.1.128:5000/hello-world:v1
 
 
 
-\** **other**
+ **other**
 
 ```
 docker commit :从容器创建一个新的镜像。
