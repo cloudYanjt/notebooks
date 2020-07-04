@@ -81,7 +81,7 @@ Dubbo是阿里巴巴开源的基于Java的高性能RPC（一种远程调用）�
 <dependency>
     <groupId>org.apache.dubbo</groupId>
     <artifactId>dubbo-dependencies-zookeeper</artifactId>
-    <version>${dubbo.version}</version>
+    <version>2.7.3</version>
     <type>pom</type>
     <exclusions>
         <exclusion>
@@ -179,7 +179,7 @@ dubbo:
 <dependency>
     <groupId>org.apache.dubbo</groupId>
     <artifactId>dubbo-dependencies-zookeeper</artifactId>
-    <version>${dubbo.version}</version>
+    <version>2.7.3</version>
     <type>pom</type>
     <exclusions>
         <exclusion>
