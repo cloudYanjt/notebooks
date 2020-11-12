@@ -4,9 +4,9 @@
 示例：
 
 ```properties
-# 配置文件应用到的设备名称，必须和 `NAME` 值一样
+# 网卡名称
 DEVICE=ens32
-# 网卡物理设备名称
+# 网络接口名称
 NAME=ens32
 # 接口类型，常见有的Ethernet, Bridge
 TYPE=Ethernet
@@ -18,12 +18,16 @@ BROWSER_ONLY=no
 BOOTPROTO=static
 # 默认路由：是
 DEFROUTE=yes
+# 是否允许DHCP获得的DNS覆盖本地的DNS
+PEERDNS=yes
+# 是否从DHCP服务器获取用于定义接口的默认网关的信息的路由表条目
+PEERROUTES=yes
 # 如果ipv4配置失败禁用设备,默认否
 IPV4_FAILURE_FATAL=no
 # ip地址
-IPADDR=192.168.188.129
+IPADDR=192.168.111.129
 # 网关
-GATWAY=192.168.188.2
+GATEWAY=192.168.111.2
 # 子网掩码24位，和NETMASK=255.255.255.0作用相同
 PREFIX=24
 # 子网掩码
@@ -41,10 +45,14 @@ IPV6_AUTOCONF=yes
 IPV6_DEFROUTE=yes
 # IPV6地址生成模型：stable-privacy [这只一种生成IPV6的策略]
 IPV6_ADDR_GEN_MODE=stable-privacy
+# IPV6是否允许DHCP获得的DNS覆盖本地的DNS
+IPV6_PEERDNS=yes
+# IPV6是否从DHCP服务器获取用于定义接口的默认网关的信息的路由表条目
+IPV6_PEERROUTES=yes
 # 设备的惟一标识
-UUID=eced9b2f-8470-4f35-a7bf-15b311199b8b
+UUID=07ece256-a28d-447e-add2-ab43bfc241cd
 # mac地址
-HWADDR=78:2B:CB:57:28:E5
+HWADDR=00:0C:29:58:C2:28
 # 在系统引导时是否激活此设备
 ONBOOT=yes
 
