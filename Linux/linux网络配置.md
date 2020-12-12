@@ -1,7 +1,12 @@
-网卡的配置在：/etc/sysconfig/network-scripts/下，配置文件：ifcfg-网卡名。
-网络配置参考文件 /usr/share/doc/initscripts-*/sysconfig.txt
+# linux网络配置
 
-示例：
+网卡的配置在：/etc/sysconfig/network-scripts/下，配置文件：ifcfg-网卡名。
+网络配置参考文件 /usr/share/doc/initscripts-.../sysconfig.txt
+
+重启网络服务命令:
+`systemctl restart network`
+
+配置示例：
 
 ```properties
 # 网卡名称
@@ -25,7 +30,7 @@ PEERROUTES=yes
 # 如果ipv4配置失败禁用设备,默认否
 IPV4_FAILURE_FATAL=no
 # ip地址
-IPADDR=192.168.111.129
+IPADDR=192.168.111.128
 # 网关
 GATEWAY=192.168.111.2
 # 子网掩码24位，和NETMASK=255.255.255.0作用相同
@@ -50,9 +55,9 @@ IPV6_PEERDNS=yes
 # IPV6是否从DHCP服务器获取用于定义接口的默认网关的信息的路由表条目
 IPV6_PEERROUTES=yes
 # 设备的惟一标识
-UUID=07ece256-a28d-447e-add2-ab43bfc241cd
+UUID=f0746fcd-d566-4ef0-824e-5e246c1ef1d1
 # mac地址
-HWADDR=00:0C:29:58:C2:28
+HWADDR=00:0C:29:DC:6C:54
 # 在系统引导时是否激活此设备
 ONBOOT=yes
 
