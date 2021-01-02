@@ -3,7 +3,7 @@
 ### 1、获取 draw.io 镜像
 
 ```shell
-docker pull fjudith/draw.io:latest
+docker pull jgraph/drawio:latest
 ```
 ### 2、启动 draw.io 容器
 
@@ -13,7 +13,7 @@ docker run --detach \
   --publish 8080:8080 --publish 8443:8443 \
   --name draw \
   --restart always \
-  fjudith/draw.io:latest
+  jgraph/drawio:latest
 ```
 
 ### 3、获取容器日志
