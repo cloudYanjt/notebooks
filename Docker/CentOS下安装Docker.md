@@ -45,6 +45,13 @@ sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/cen
 sudo yum  install docker-ce
 ```
 
+### 6.1 或者 ...
+
+不管是在 Ubuntu 或 CentOS 都只需要执行下面指令就会自动安装最新版 Docker。
+`curl -fsSL "https://get.docker.com/" | sh`
+*国内下载慢可以指定阿里源*
+`curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun`
+
 ## 7、启动 Docker 后台服务
 
 ```shell
