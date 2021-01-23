@@ -144,9 +144,9 @@ docker logs -f nexus
 
 ```
 userName:admin
-password:nexus3 默认密码不在是 admin123，需要登入容器查看密码
+password:[nexus3 默认密码不再是 admin123了，需要登入容器查看密码：
 sudo docker exec -it nexus /bin/bash
-bash-4.4$ cat /opt/sonatype/sonatype-work/nexus3/admin.password
+bash-4.4$ cat /opt/sonatype/sonatype-work/nexus3/admin.password]
 ```
 
 ## sonarqube
