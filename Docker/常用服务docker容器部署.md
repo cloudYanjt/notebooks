@@ -528,6 +528,77 @@ docker run --detach \
 docker logs -f zookeeper
 ```
 
+## Kafka
+
+### 1、获取 Kafka 镜像
+
+```shell
+docker pull wurstmeister/kafka:2.12-2.5.0
+```
+
+### 2、Kafka 需要 Zookeeper 管理，所以需要先启动 Zookeeper 然后启动 Kafka
+
+```shell
+docker run --detach \
+  --hostname kafka.example.com \
+  -p 9092:9092 \
+  --name kafka \
+  --restart always \
+  -e KAFKA_BROKER_ID=0 \
+  -e KAFKA_ZOOKEEPER_CONNECT=192.168.111.130:2181/kafka \
+  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.111.130:9092 \
+  -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \
+  -v kafka:/kafka \
+  -v /etc/localtime:/etc/localtime \
+  wurstmeister/kafka:2.12-2.5.0
+```
+
+  -e KAFKA_BROKER_ID=0  在kafka集群中，每个kafka都有一个BROKER_ID来区分自己
+  -e KAFKA_ZOOKEEPER_CONNECT=192.168.111.130:2181 配置zookeeper管理kafka的路径
+  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.111.130:9092  把kafka的地址端口注册给zookeeper
+  -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 配置kafka的监听端口
+  -v /etc/localtime:/etc/localtime 容器时间同步宿主机的时间
+
+### 3、获取容器日志
+
+```shell
+docker logs -f kafka
+```
+
+## kafka-manager
+
+### 1、获取 kafka-manager 镜像
+
+```shell
+docker pull hlebalbau/kafka-manager:3.0.0.5
+```
+
+### 2、启动 kafka-manager 容器
+
+```shell
+docker run --detach \
+  --hostname kafkamanager.example.com \
+  -p 9000:9000 \
+  --name kafka-manager \
+  --restart always \
+  -e ZK_HOSTS="192.168.111.130:2181" \
+  -v kafka-manager_conf:/kafka-manager/conf \
+  -v /etc/localtime:/etc/localtime \
+  hlebalbau/kafka-manager:3.0.0.5
+```
+
+如果要使用基本身份验证保护 Web UI，请添加以下 env 变量：‎
+
+-e KAFKA_MANAGER_AUTH_ENABLED: "true" \
+-e KAFKA_MANAGER_USERNAME: username \
+-e KAFKA_MANAGER_PASSWORD: password \
+
+### 3、获取容器日志
+
+```shell
+docker logs -f kafka-manager
+```
+
 ## jumpserver
 
 ### 1、获取 jumpserver 镜像
