@@ -245,6 +245,58 @@ docker run --detach \
 docker logs -f registry
 ```
 
+## mariadb(配置基本和mysql一样)
+
+### 1、获取 mariadb 镜像
+
+```shell
+docker pull mariadb:10.5.9
+```
+
+### 2、启动 mariadb 容器
+
+```shell
+docker run --detach \
+  --hostname mariadb.example.com \
+  --publish 3306:3306 \
+  --name mariadb \
+  --restart always \
+  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
+  --volume mariadb_data:/var/lib/mysql \
+  mariadb:10.5.9
+```
+
+### 3、获取容器日志
+
+```shell
+docker logs -f mariadb
+```
+
+### 4、环境变量说明
+
+```
+MYSQL_ROOT_PASSWORD：必填，指定将为 MariaDB 超级用户帐户设置密码。
+MYSQL_DATABASE：可选，允许您指定要在映像启动时创建的数据库的名称。
+MYSQL_USER,MYSQL_PASSWORD：可选，用于创建新用户和设置该用户的密码。
+MYSQL_ALLOW_EMPTY_PASSWORD：可选，设置为非空值（如 yes，以允许容器 root 用户的空白密码启动）。
+MYSQL_RANDOM_ROOT_PASSWORD：可选，设置为非空值（如 yes，将为root用户生成随机初始密码，生成的root密码将打印到标准输出）。
+MYSQL_ONETIME_PASSWORD：可选，将 root 设置为初始化完成后过期的用户，强制在首次登录时更改密码，任何非空值都将激活此设置。
+MYSQL_INITDB_SKIP_TZINFO：默认情况下，入口点脚本会自动加载函数所需的时区数据。如果不需要，则设置任何非空值将禁用时区加载。
+```
+
+### 5、Other
+
+```
+1、自定义配置文件，“/my/custom/config-file.cnf”
+--volume /my/custom:/etc/mysql/conf.d
+
+2、启动命令 <mariadb:tag> 后面添加如下参数，即更改所有表的默认编码和排序规则
+--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+3、如果您想查看可用选项的完整列表，只需运行：
+docker run -it --rm mariadb:10.5.9 --verbose --help
+```
+
 ## mysql
 
 ### 1、获取 mysql 镜像
@@ -261,7 +313,7 @@ docker run --detach \
   --publish 3306:3306 --publish 33060:33060 \
   --name mysql \
   --restart always \
-  -e MYSQL_ROOT_PASSWORD=mysecretpassword \
+  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
   --volume mysql_data:/var/lib/mysql \
   mysql:5.7.32
 ```
@@ -313,7 +365,7 @@ docker run --detach \
   --publish 5432:5432 \
   --name postgresql \
   --restart always \
-  -e POSTGRES_PASSWORD=mysecretpassword \
+  -e POSTGRES_PASSWORD=my-secret-pw \
   --volume postgresql_data:/var/lib/postgresql/data \
   postgres:9.6.20
 ```
@@ -337,7 +389,7 @@ POSTGRES_DB：可选，用于为首次启动映像时创建的默认数据库定
 ### 1、获取 redis 镜像
 
 ```shell
-docker pull redis:5.0.10
+docker pull redis:latest
 ```
 
 ### 2、启动 redis 容器
@@ -349,7 +401,7 @@ docker run --detach \
   --name redis \
   --restart always \
   --volume redis_data:/data \
-  redis:5.0.10 \
+  redis:latest \
   redis-server --appendonly yes
 ```
 
@@ -376,6 +428,32 @@ redis-server --appendonly yes
     --volume /myredis/conf/redis.conf:/usr/local/etc/redis/redis.conf
     b、启动命令 <resid:tag> 后面添加如下参数
     redis-server /usr/local/etc/redis/redis.conf
+```
+
+## redisInsight
+
+### 1、获取 redisInsight 镜像
+
+```shell
+docker pull edisinsight:latest
+```
+
+### 2、启动 redisInsight 容器
+
+```shell
+docker run --detach \
+  --hostname edisinsight.example.com \
+  --publish 8001:8001 \
+  --name edisinsight \
+  --restart always \
+  --volume redisinsight:/db \
+  edisinsight:latest
+```
+
+### 3、获取容器日志
+
+```
+docker logs -f edisinsight
 ```
 
 ## mongodb
@@ -497,6 +575,34 @@ docker run --detach \
 
 ```shell
 docker logs -f nginx
+```
+
+## httpd
+
+### 1、获取 httpd 镜像
+
+```shell
+docker pull httpd:2.4
+```
+
+### 2、启动 httpd 容器
+
+使用 `--volume ./my-httpd.conf:/usr/local/apache2/conf/httpd.conf` 参数把指定配置文件映射到容器。
+
+```shell
+docker run --detach \
+  --hostname httpd.example.com \
+  --publish 80:80 \
+  --name httpd \
+  --restart always \
+  --volume "$PWD":/usr/local/apache2/htdocs/ \
+  httpd:2.4
+```
+
+### 3、获取容器日志
+
+```shell
+docker logs -f httpd
 ```
 
 ## zookeeper
