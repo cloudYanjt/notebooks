@@ -2,12 +2,12 @@
 
 ### 1、获取 draw.io 镜像
 
-```shell
+```
 docker pull jgraph/drawio:latest
 ```
 ### 2、启动 draw.io 容器
 
-```shell
+```
 docker run --detach \
   --hostname draw.example.com \
   --publish 8080:8080 --publish 8443:8443 \
@@ -18,7 +18,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f draw
 ```
 
@@ -26,13 +26,13 @@ docker logs -f draw
 
 ### 1、获取 asciiflow2 镜像
 
-```shell
+```
 docker pull flexo3001/asciiflow2:latest
 ```
 
 ### 2、启动 asciiflow2 容器
 
-```shell
+```
 docker run --detach \
   --hostname asciiflow2.example.com \
   --publish 80:80 \
@@ -43,7 +43,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f asciiflow2
 ```
 
@@ -51,13 +51,13 @@ docker logs -f asciiflow2
 
 ### 1、获取 excalidraw 镜像
 
-```shell
+```
 docker pull excalidraw/excalidraw:latest
 ```
 
 ### 2、启动 excalidraw 容器
 
-```shell
+```
 docker run --detach \
   --hostname excalidraw.example.com \
   --publish 80:80 \
@@ -68,7 +68,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f excalidraw
 ```
 
@@ -76,20 +76,20 @@ docker logs -f excalidraw
 
 ### 1、获取 gitlab 镜像
 
-```shell
+```
 docker pull gitlab/gitlab-ce:13.5.4-ce.0
 ```
 
 ### 2、创建目录及设置环境变量
 
-```shell
+```
 mkdir -p /host/path/gitlab & \
 export GITLAB_HOME=/host/path/gitlab
 ```
 
 ### 3、启动 gitlab 容器
 
-```shell
+```
 docker run --detach \
   --hostname gitlab.example.com \
   --publish 443:443 --publish 80:80 --publish 22:22 \
@@ -103,7 +103,7 @@ docker run --detach \
 
 ### 4、获取容器日志
 
-```shell
+```
 docker logs -f gitlab
 ```
 
@@ -111,20 +111,20 @@ docker logs -f gitlab
 
 ### 1、获取 nexus 镜像
 
-```shell
+```
 docker pull sonatype/nexus3:3.28.1
 ```
 
 ### 2、创建目录，由于 sonatype/nexus3:3.28.1 内部使用的是 nexus:200 的用户，所以需要更改目录权限
 
-```shell
+```
 mkdir -p /host/path/nexus-data & \
 chown -R 200 /host/path/nexus-data
 ```
 
 ### 3、启动 nexus 容器
 
-```shell
+```
 docker run --detach \
   --hostname nexus.example.com \
   --publish 8081:8081 \
@@ -136,7 +136,7 @@ docker run --detach \
 
 ### 4、获取容器日志
 
-```shell
+```
 docker logs -f nexus
 ```
 
@@ -153,13 +153,13 @@ bash-4.4$ cat /opt/sonatype/sonatype-work/nexus3/admin.password]
 
 ### 1、获取 sonarqube 镜像
 
-```shell
+```
 docker pull sonarqube:7.9.5-community
 ```
 
 ### 2、启动 sonarqube 容器
 
-```shell
+```
 docker run --detach \
   --hostname sonarqube.example.com \
   --publish 9000:9000 \
@@ -180,30 +180,30 @@ eg:
 
 ### 3、获取容器日志
 
-```SHELL
+```
 docker logs -f sonarqube
 ```
 默认用户和密码 `admin`,`admin`
 
 ### 4、启动遇到的问题
 
-​	出现如下错误
-​	max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+   出现如下错误
+​   max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 
-​	解决办法
-​	切换到 root 用户，执行 sysctl -w vm.max_map_count=262144 临时修改，然后再 vi /etc/sysctl.conf 文件最后添加 vm.max_map_count=262144 使永久生效。
+   解决办法
+​   切换到 root 用户，执行 sysctl -w vm.max_map_count=262144 临时修改，然后再 vi /etc/sysctl.conf 文件最后添加 vm.max_map_count=262144 使永久生效。
 
 ## wordpress
 
 ### 1、获取 wordpress 镜像
 
-```shell
+```
 docker pull wordpress:php7.4
 ```
 
 ### 2、启动 wordpress 容器
 
-```shell
+```
 docker run --detach \
   --hostname wordpress.example.com \
   --publish 8080:80 \
@@ -215,7 +215,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f wordpress
 ```
 
@@ -223,13 +223,13 @@ docker logs -f wordpress
 
 ### 1、获取 registry 镜像
 
-```shell
+```
 docker pull registry:2.7.1
 ```
 
 ### 2、启动 registry 容器
 
-```shell
+```
 docker run --detach \
   --hostname registry.example.com \
   --publish 5000:5000 \
@@ -241,7 +241,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f registry
 ```
 
@@ -249,13 +249,13 @@ docker logs -f registry
 
 ### 1、获取 mariadb 镜像
 
-```shell
+```
 docker pull mariadb:10.5.9
 ```
 
 ### 2、启动 mariadb 容器
 
-```shell
+```
 docker run --detach \
   --hostname mariadb.example.com \
   --publish 3306:3306 \
@@ -268,7 +268,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f mariadb
 ```
 
@@ -301,13 +301,13 @@ docker run -it --rm mariadb:10.5.9 --verbose --help
 
 ### 1、获取 mysql 镜像
 
-```shell
+```
 docker pull mysql:5.7.32
 ```
 
 ### 2、启动 mysql 容器
 
-```shell
+```
 docker run --detach \
   --hostname mysql.example.com \
   --publish 3306:3306 --publish 33060:33060 \
@@ -320,7 +320,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f mysql
 ```
 
@@ -353,13 +353,13 @@ docker run -it --rm mysql:5.7.32 --verbose --help
 
 ### 1、获取 postgresql 镜像
 
-```shell
+```
 docker pull postgres:9.6.20
 ```
 
 ### 2、启动 postgresql 容器
 
-```shell
+```
 docker run --detach \
   --hostname postgresql.example.com \
   --publish 5432:5432 \
@@ -372,7 +372,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f postgresql
 ```
 
@@ -388,13 +388,13 @@ POSTGRES_DB：可选，用于为首次启动映像时创建的默认数据库定
 
 ### 1、获取 redis 镜像
 
-```shell
+```
 docker pull redis:latest
 ```
 
 ### 2、启动 redis 容器
 
-```shell
+```
 docker run --detach \
   --hostname redis.example.com \
   --publish 6379:6379 \
@@ -407,13 +407,13 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f redis
 ```
 
 ### 4、打开 redis 客户端
 
-```shell
+```
 docker exec -it redis redis-cli
 ```
 
@@ -434,13 +434,13 @@ redis-server --appendonly yes
 
 ### 1、获取 redisInsight 镜像
 
-```shell
+```
 docker pull edisinsight:latest
 ```
 
 ### 2、启动 redisInsight 容器
 
-```shell
+```
 docker run --detach \
   --hostname edisinsight.example.com \
   --publish 8001:8001 \
@@ -460,13 +460,13 @@ docker logs -f edisinsight
 
 ### 1、获取 mongodb 镜像
 
-```shell
+```
 docker pull mongo:4.4.2
 ```
 
 ### 2、启动 mongodb 容器
 
-```shell
+```
 docker run --detach \
   --hostname mongo.example.com \
   --publish 27017:27017 \
@@ -479,7 +479,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f mongo
 ```
 
@@ -503,13 +503,13 @@ docker logs -f mongo
 
 ### 1、获取 rabbitmq 镜像
 
-```shell
+```
 docker pull rabbitmq:3.8.9
 ```
 
 ### 2、启动 rabbitmq 容器
 
-```shell
+```
 docker run --detach \
   --hostname rabbitmq.example.com \
   --publish 4369:4369 --publish 5671:5671 \
@@ -523,13 +523,13 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f rabbitmq
 ```
 
 ### 4、带管理插件的镜像 rabbitmq-management
 
-```shell
+```
 docker pull rabbitmq:3.8.9-management
 
 docker run --detach \
@@ -552,7 +552,7 @@ docker run --detach \
 
 ### 1、获取 nginx 镜像
 
-```shell
+```
 docker pull nginx:1.19.5
 ```
 
@@ -560,7 +560,7 @@ docker pull nginx:1.19.5
 
 使用 `--volume /host/path/nginx.conf:/etc/nginx/nginx.conf:ro` 参数把指定配置文件映射到容器。
 
-```shell
+```
 docker run --detach \
   --hostname nginx.example.com \
   --publish 80:80 \
@@ -573,7 +573,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f nginx
 ```
 
@@ -581,7 +581,7 @@ docker logs -f nginx
 
 ### 1、获取 httpd 镜像
 
-```shell
+```
 docker pull httpd:2.4
 ```
 
@@ -589,7 +589,7 @@ docker pull httpd:2.4
 
 使用 `--volume ./my-httpd.conf:/usr/local/apache2/conf/httpd.conf` 参数把指定配置文件映射到容器。
 
-```shell
+```
 docker run --detach \
   --hostname httpd.example.com \
   --publish 80:80 \
@@ -601,7 +601,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f httpd
 ```
 
@@ -609,13 +609,13 @@ docker logs -f httpd
 
 ### 1、获取 zookeeper 镜像
 
-```shell
+```
 docker pull zookeeper:3.6.2
 ```
 
 ### 2、启动 zookeeper 容器
 
-```shell
+```
 docker run --detach \
   --hostname zookeeper.example.com \
   --publish 2181:2181 --publish 2888:2888 \
@@ -630,7 +630,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f zookeeper
 ```
 
@@ -638,13 +638,13 @@ docker logs -f zookeeper
 
 ### 1、获取 Kafka 镜像
 
-```shell
+```
 docker pull wurstmeister/kafka:2.12-2.5.0
 ```
 
 ### 2、Kafka 需要 Zookeeper 管理，所以需要先启动 Zookeeper 然后启动 Kafka
 
-```shell
+```
 docker run --detach \
   --hostname kafka.example.com \
   -p 9092:9092 \
@@ -667,7 +667,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f kafka
 ```
 
@@ -675,13 +675,13 @@ docker logs -f kafka
 
 ### 1、获取 kafka-manager 镜像
 
-```shell
+```
 docker pull hlebalbau/kafka-manager:3.0.0.5
 ```
 
 ### 2、启动 kafka-manager 容器
 
-```shell
+```
 docker run --detach \
   --hostname kafkamanager.example.com \
   -p 9000:9000 \
@@ -701,7 +701,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f kafka-manager
 ```
 
@@ -709,13 +709,13 @@ docker logs -f kafka-manager
 
 ### 1、获取 jumpserver 镜像
 
-```shell
+```
 docker pull jumpserver/jms_all:v2.5.3
 ```
 
 ### 2、设置环境变量
 
-```shell
+```
 if [ ! "$SECRET_KEY" ]; then
   SECRET_KEY=`cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 50`;
   echo "SECRET_KEY=$SECRET_KEY" >> ~/.bashrc;
@@ -734,7 +734,7 @@ fi
 
 ### 3、启动 jumpserver 容器
 
-```shell
+```
 docker run --detach \
   --hostname jumpserver.example.org \
   --publish  80:80 --publish  2222:2222 \
@@ -752,7 +752,7 @@ docker run --detach \
 
 #### 或者使用外部数据库
 
-```shell
+```
 docker run --name jms_all -d \
   -v /opt/jumpserver/data:/opt/jumpserver/data \
   -p 80:80 \
@@ -773,7 +773,7 @@ docker run --name jms_all -d \
 
 ### 4、获取容器日志
 
-```shell
+```
 docker logs -f jms_all
 ```
 
@@ -781,13 +781,13 @@ docker logs -f jms_all
 
 ### 1、获取 portainer 镜像
 
-```shell
+```
 docker pull portainer/portainer-ce:2.0.0
 ```
 
 ### 2、启动 portainer 容器
 
-```shell
+```
 docker run --detach \
   --hostname portainer.example.com \
   --publish 9000:9000 --publish 8000:8000 \
@@ -801,7 +801,7 @@ docker run --detach \
 
 ### 3、获取容器日志
 
-```shell
+```
 docker logs -f portainer
 ```
 
@@ -809,23 +809,23 @@ docker logs -f portainer
 
 ### 1、获取 elasticsearch 镜像
 
-```shell
-docker pull elasticsearch:7.6.2
+```
+docker pull docker.elastic.co/elasticsearch/elasticsearch:7.11.2
 ```
 
 ### 2、创建用户定义的网络
 
 （可用于连接到同一网络的其他服务（例如 Kibana））
 
-```shell
+```
 docker network create elasticnetwork
 ```
 
 ### 3、启动 elasticsearch 容器
 
-可以使用 `--volume /host/path/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml` 指定映射配置文件。
+可以使用 `--volume="$(pwd)/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro"` 指定映射配置文件。
 
-```shell
+```
 docker run --detach \
   --hostname elasticsearch.example.org \
   --net elasticnetwork \
@@ -833,13 +833,13 @@ docker run --detach \
   --name elasticsearch \
   --restart always \
   -e "discovery.type=single-node" \
-  --volume elasticsearch_data:/usr/share/elasticsearch/data \
-  elasticsearch:7.6.2
+  --volume="$(pwd)/data:/usr/share/elasticsearch/data" \
+  docker.elastic.co/elasticsearch/elasticsearch:7.11.2
 ```
 
 ### 4、获取容器日志
 
-```shell
+```
 docker logs -f elasticsearch
 ```
 
@@ -849,7 +849,7 @@ docker logs -f elasticsearch
 version: '2.2'
 services:
   es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.2
     container_name: es01
     environment:
       - node.name=es01
@@ -869,7 +869,7 @@ services:
     networks:
       - elastic
   es02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.2
     container_name: es02
     environment:
       - node.name=es02
@@ -887,7 +887,7 @@ services:
     networks:
       - elastic
   es03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.2
     container_name: es03
     environment:
       - node.name=es03
@@ -922,15 +922,15 @@ networks:
 
 ### 1、获取 kibana 镜像
 
-```shell
-docker pull kibana:7.6.2
+```
+docker pull docker.elastic.co/kibana/kibana:7.11.2
 ```
 
 ### 2、创建用户定义的网络
 
 （可用于连接到同一网络的其他服务（例如 Elasticsearch））
 
-```shell
+```
 docker network create elasticnetwork
 ```
 
@@ -939,9 +939,9 @@ docker network create elasticnetwork
 Kibana 可以快速启动并连接到本地 Elasticsearch 容器
 (`--link YOUR_ELASTICSEARCH_CONTAINER_NAME_OR_ID:elasticsearch`)
 或者指定环境变量 `-e "elasticsearch.hosts=http://elasticsearch_url:9200"`
-可以使用 `--volume /host/path/kibana.yml:/usr/share/kibana/config/kibana.yml` 指定映射配置文件
+可以使用 `--volume="$(pwd)/kibana.yml:/usr/share/kibana/config/kibana.yml:ro"` 指定映射配置文件
 
-```shell
+```
 docker run --detach \
   --hostname kibana.example.org \
   --net elasticnetwork \
@@ -949,12 +949,12 @@ docker run --detach \
   --name kibana \
   --restart always \
   --link elasticsearch:elasticsearch \
-  kibana:7.6.2
+  docker.elastic.co/kibana/kibana:7.11.2
 ```
 
 ### 4、获取容器日志
 
-```shell
+```
 docker logs -f kibana
 ```
 
@@ -964,7 +964,7 @@ docker logs -f kibana
 version: '2'
 services:
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.10.0
+    image: docker.elastic.co/kibana/kibana:7.11.2
     environment:
       SERVER_NAME: kibana.example.org
       ELASTICSEARCH_HOSTS: http://elasticsearch.example.org:9200
@@ -982,15 +982,15 @@ services:
 
 ### 1、获取 logstash 镜像
 
-```shell
-docker pull logstash:7.6.2
+```
+docker pull docker.elastic.co/logstash/logstash:7.11.2
 ```
 
 ### 2、创建用户定义的网络
 
 （可用于连接到同一网络的其他服务（例如 Elasticsearch））
 
-```shell
+```
 docker network create elasticnetwork
 ```
 
@@ -999,10 +999,10 @@ docker network create elasticnetwork
 Logstash 可以快速启动并连接到本地 Elasticsearch 容器
 (`--link YOUR_ELASTICSEARCH_CONTAINER_NAME_OR_ID:elasticsearch`)；
 或者指定环境变量 `-e "monitoring.elasticsearch.hosts=http://elasticsearch_url:9200"`
-可以使用 `--volume /host/path/logstash.yml:/usr/share/logstash/config/logstash.yml` 指定映射配置文件。
-指定采集相关的配置文件 `--volume /host/path/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf`
+可以使用 `--volume="$(pwd)/logstash.yml:/usr/share/logstash/config/logstash.yml:ro"` 指定映射配置文件。
+指定采集相关的配置文件 `--volume="$(pwd)/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro"`
 
-```shell
+```
 docker run --detach \
   --hostname logstash.example.org \
   --net elasticnetwork \
@@ -1010,13 +1010,13 @@ docker run --detach \
   --name logstash \
   --restart always \
   --link elasticsearch:elasticsearch \
-  --volume /host/path/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf \
-  logstash:7.6.2
+  --volume="$(pwd)/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro" \
+  docker.elastic.co/logstash/logstash:7.11.2
 ```
 
 ### 4、获取容器日志
 
-```shell
+```
 docker logs -f logstash
 ```
 
@@ -1028,8 +1028,36 @@ docker logs -f logstash
 
 ## filebeat
 
-### 1、获取 filebeat镜像
+### 1、获取 filebeat 镜像
 
 ```
-docker pull elastic/filebeat:7.6.2
+docker pull docker.elastic.co/beats/filebeat:7.11.2
+```
+
+### 2、创建用户定义的网络
+
+（可用于连接到同一网络的其他服务（例如 Elasticsearch））
+
+```
+docker network create elasticnetwork
+```
+
+### 3、启动 filebeat 容器
+
+```
+docker run --detach \
+  --hostname filebeat.example.org \
+  --user=root \
+  --net elasticnetwork \
+  --publish 5044:5044 --publish 9600:9600 \
+  --name filebeat \
+  --restart always \
+  --volume="$(pwd)/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro" \
+  docker.elastic.co/beats/filebeat:7.11.2
+```
+
+### 4、获取容器日志
+
+```
+docker logs -f filebeat
 ```
