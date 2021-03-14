@@ -818,17 +818,19 @@ docker pull docker.elastic.co/elasticsearch/elasticsearch:7.11.2
 （可用于连接到同一网络的其他服务（例如 Kibana））
 
 ```
-docker network create elasticnetwork
+docker network create elastic-network
 ```
 
 ### 3、启动 elasticsearch 容器
+
+*遇到启动报访问权限错误可以使用 `sudo chmod g+rwx -R $PWD/data` 来授予宿主机对应的映射文件夹的访问权限*
 
 可以使用 `--volume="$(pwd)/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro"` 指定映射配置文件。
 
 ```
 docker run --detach \
   --hostname elasticsearch.example.org \
-  --net elasticnetwork \
+  --net elastic-network \
   --publish 9200:9200 --publish 9300:9300 \
   --name elasticsearch \
   --restart always \
@@ -931,10 +933,12 @@ docker pull docker.elastic.co/kibana/kibana:7.11.2
 （可用于连接到同一网络的其他服务（例如 Elasticsearch））
 
 ```
-docker network create elasticnetwork
+docker network create elastic-network
 ```
 
 ### 3、启动 kibana 容器
+
+*遇到启动报访问权限错误可以使用 `sudo chmod g+rwx -R $PWD` 来授予宿主机对应的映射文件夹的访问权限*
 
 Kibana 可以快速启动并连接到本地 Elasticsearch 容器
 (`--link YOUR_ELASTICSEARCH_CONTAINER_NAME_OR_ID:elasticsearch`)
@@ -944,7 +948,7 @@ Kibana 可以快速启动并连接到本地 Elasticsearch 容器
 ```
 docker run --detach \
   --hostname kibana.example.org \
-  --net elasticnetwork \
+  --net elastic-network \
   --publish 5601:5601 \
   --name kibana \
   --restart always \
@@ -991,10 +995,12 @@ docker pull docker.elastic.co/logstash/logstash:7.11.2
 （可用于连接到同一网络的其他服务（例如 Elasticsearch））
 
 ```
-docker network create elasticnetwork
+docker network create elastic-network
 ```
 
 ### 3、启动 logstash 容器
+
+*遇到启动报访问权限错误可以使用 `sudo chmod g+rwx -R $PWD` 来授予宿主机对应的映射文件夹的访问权限*
 
 Logstash 可以快速启动并连接到本地 Elasticsearch 容器
 (`--link YOUR_ELASTICSEARCH_CONTAINER_NAME_OR_ID:elasticsearch`)；
@@ -1005,7 +1011,7 @@ Logstash 可以快速启动并连接到本地 Elasticsearch 容器
 ```
 docker run --detach \
   --hostname logstash.example.org \
-  --net elasticnetwork \
+  --net elastic-network \
   --publish 5044:5044 --publish 9600:9600 \
   --name logstash \
   --restart always \
@@ -1039,16 +1045,17 @@ docker pull docker.elastic.co/beats/filebeat:7.11.2
 （可用于连接到同一网络的其他服务（例如 Elasticsearch））
 
 ```
-docker network create elasticnetwork
+docker network create elastic-network
 ```
 
 ### 3、启动 filebeat 容器
 
+*遇到启动报访问权限错误可以使用 `sudo chmod g+rwx -R $PWD` 来授予宿主机对应的映射文件夹的访问权限*
+
 ```
 docker run --detach \
   --hostname filebeat.example.org \
-  --user=root \
-  --net elasticnetwork \
+  --net elastic-network \
   --publish 5044:5044 --publish 9600:9600 \
   --name filebeat \
   --restart always \
