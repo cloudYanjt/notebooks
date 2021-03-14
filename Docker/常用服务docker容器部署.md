@@ -1020,6 +1020,39 @@ docker run --detach \
   docker.elastic.co/logstash/logstash:7.11.2
 ```
 
+logstash.conf 配置文件示例：
+
+```
+input {
+  tcp {
+    mode => "server"
+    host => "0.0.0.0"
+    port => 5047
+    codec => json_lines
+    type => "info"
+  }
+  tcp {
+    mode => "server"
+    host => "0.0.0.0"
+    port => 5048
+    codec => json_lines
+    type => "error"
+  }
+}
+
+filter{}
+
+output {
+    elasticsearch {
+      hosts => ["172.19.0.2:9200"]
+      index => "logstash-%{type}-%{+YYYY.MM.dd}"
+    }
+}
+
+```
+
+
+
 ### 4、获取容器日志
 
 ```
@@ -1056,11 +1089,26 @@ docker network create elastic-network
 docker run --detach \
   --hostname filebeat.example.org \
   --net elastic-network \
-  --publish 5044:5044 --publish 9600:9600 \
   --name filebeat \
   --restart always \
   --volume="$(pwd)/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro" \
-  docker.elastic.co/beats/filebeat:7.11.2
+  docker.elastic.co/beats/filebeat:7.11.2 filebeat -e -strict.perms=false \
+  -E output.elasticsearch.hosts=["elasticsearch:9200"]
+```
+
+filebeat.yml 配置文件示例：（采集系统日志 /var/log/messages）
+
+```
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/messages
+
+output.elasticsearch:
+  hosts: '172.19.0.2:9200'
+  indices:
+    - index: "elk-system-log-%{+yyyy.MM.dd}"
 ```
 
 ### 4、获取容器日志
