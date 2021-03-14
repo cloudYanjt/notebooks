@@ -1045,7 +1045,7 @@ filter{}
 output {
     elasticsearch {
       hosts => ["172.19.0.2:9200"]
-      index => "logstash-%{type}-%{+YYYY.MM.dd}"
+      index => "logstash-%{type}-%{+yyyy.MM.dd}"
     }
 }
 
@@ -1116,3 +1116,4 @@ output.elasticsearch:
 ```
 docker logs -f filebeat
 ```
+
