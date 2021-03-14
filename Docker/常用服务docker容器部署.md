@@ -1096,14 +1096,15 @@ docker run --detach \
   -E output.elasticsearch.hosts=["elasticsearch:9200"]
 ```
 
-filebeat.yml 配置文件示例：（采集系统日志 /var/log/messages）
+filebeat.yml 配置文件示例：例如采集系统日志（需要先把 /var/log/messages 映射到容器）
+`--volume="/var/log/messages:/logs/messages:ro"`
 
 ```
 filebeat.inputs:
 - type: log
   enabled: true
   paths:
-    - /var/log/messages
+    - /logs/messages
 
 output.elasticsearch:
   hosts: '172.19.0.2:9200'
