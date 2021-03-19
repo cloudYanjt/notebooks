@@ -818,7 +818,7 @@ docker pull docker.elastic.co/elasticsearch/elasticsearch:7.11.2
 （可用于连接到同一网络的其他服务（例如 Kibana））
 
 ```
-docker network create elastic-network
+docker network create --subnet=172.19.0.0/16 elastic-network
 ```
 
 ### 3、启动 elasticsearch 容器
@@ -826,6 +826,8 @@ docker network create elastic-network
 *遇到启动报访问权限错误可以使用 `sudo chmod g+rwx -R $PWD/data` 来授予宿主机对应的映射文件夹的访问权限*
 
 可以使用 `--volume="$(pwd)/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro"` 指定映射配置文件。
+
+#### 1) 仅单节点启动
 
 ```
 docker run --detach \
@@ -839,13 +841,51 @@ docker run --detach \
   docker.elastic.co/elasticsearch/elasticsearch:7.11.2
 ```
 
-### 4、获取容器日志
+#### 2)集群启动 (参照如下命令启动多个)
+
+```
+docker run --detach \
+  --hostname elasticsearch.virtual.org \
+  --net elastic-network \
+  --ip 172.19.0.11 \
+  --publish 9200:9200 --publish 9300:9300 \
+  --name elasticsearch \
+  --restart always \
+  --volume="$(pwd)/elastic/elasticsearch/data:/usr/share/elasticsearch/data" \
+  --volume="$(pwd)/elastic/elasticsearch/logs:/usr/share/elasticsearch/logs" \
+  --volume="$(pwd)/elastic/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro" \
+  docker.elastic.co/elasticsearch/elasticsearch:7.11.2
+```
+
+elasticsearch.yml 参考：集群的其余节点 node.name 和 network.host 保持不一致
+
+```
+cluster.name: es-cluster                         #指定集群名称，同一集群必须相同
+node.name: node-1                                #指定节点的名称，同一集群的节点名称不能相同
+node.master: true                                #是否允许成为主节点
+node.data: true                                  #是否用做数据节点
+path.data: /usr/share/elasticsearch/data         #数据存放路径
+path.logs: /usr/share/elasticsearch/logs         #日志路径
+network.host: 172.19.0.11                        #设置绑定ip
+transport.tcp.port: 9300                         #ES集群之间通讯端口号
+transport.tcp.compress: true 
+http.port: 9200                                  #暴露ES RESTful接口端口号
+http.max_content_length: 100mb 
+bootstrap.memory_lock: false                     #启动后锁定物理内存，避免es使用swap交换分区。
+discovery.seed_hosts: ["172.19.0.11","172.19.0.12","172.19.0.13"] #集群节点地址
+cluster.initial_master_nodes: ["172.19.0.11","172.19.0.12","172.19.0.13"] #初始化集群列表
+gateway.recover_after_data_nodes: 2              #只要N个节点已加入群集，就可恢复。
+gateway.recover_after_time: 5m                   #如果未实现预期节点数，则恢复过程将等待配置的时间量，然后再尝试恢复
+gateway.expected_data_nodes: 3                   #集群中预期的节点数。
+```
+
+### 5、获取容器日志
 
 ```
 docker logs -f elasticsearch
 ```
 
-### 生产环境部署使用 docker-compose 参考：
+* 生产环境部署使用 docker-compose 参考：
 
 ```yaml
 version: '2.2'
@@ -933,7 +973,7 @@ docker pull docker.elastic.co/kibana/kibana:7.11.2
 （可用于连接到同一网络的其他服务（例如 Elasticsearch））
 
 ```
-docker network create elastic-network
+docker network create --subnet=172.19.0.0/16 elastic-network
 ```
 
 ### 3、启动 kibana 容器
@@ -954,6 +994,16 @@ docker run --detach \
   --restart always \
   --link elasticsearch:elasticsearch \
   docker.elastic.co/kibana/kibana:7.11.2
+```
+
+kibana.yml 配置文件示例：
+
+```
+server.name: kibana
+server.host: 172.19.0.3
+server.port: 5601
+elasticsearch.hosts: [ "http://172.19.0.11:9200", "http://172.19.0.12:9200", "http://172.19.0.13:9200"]
+i18n.locale: zh-CN
 ```
 
 ### 4、获取容器日志
@@ -995,7 +1045,7 @@ docker pull docker.elastic.co/logstash/logstash:7.11.2
 （可用于连接到同一网络的其他服务（例如 Elasticsearch））
 
 ```
-docker network create elastic-network
+docker network create --subnet=172.19.0.0/16 elastic-network
 ```
 
 ### 3、启动 logstash 容器
@@ -1078,7 +1128,7 @@ docker pull docker.elastic.co/beats/filebeat:7.11.2
 （可用于连接到同一网络的其他服务（例如 Elasticsearch））
 
 ```
-docker network create elastic-network
+docker network create --subnet=172.19.0.0/16 elastic-network
 ```
 
 ### 3、启动 filebeat 容器
