@@ -872,14 +872,41 @@ transport.tcp.compress: true
 http.port: 9200                                  #暴露ES RESTful接口端口号
 http.max_content_length: 100mb 
 bootstrap.memory_lock: false                     #启动后锁定物理内存，避免es使用swap交换分区。
-discovery.seed_hosts: ["172.19.0.11","172.19.0.12","172.19.0.13"] #集群节点地址
-cluster.initial_master_nodes: ["172.19.0.11","172.19.0.12","172.19.0.13"] #初始化集群列表
+discovery.seed_hosts:                            #集群节点地址,同一个network下可以使用容器名
+  - elasticsearch
+  - elasticsearch2
+  - elasticsearch3
+cluster.initial_master_nodes:                    #初始化集群列表
+  - node-1
+  - node-2
+  - node-3
 gateway.recover_after_data_nodes: 2              #只要N个节点已加入群集，就可恢复。
 gateway.recover_after_time: 5m                   #如果未实现预期节点数，则恢复过程将等待配置的时间量，然后再尝试恢复
 gateway.expected_data_nodes: 3                   #集群中预期的节点数。
+http.cors.enabled: true                          #允许跨域访问
+http.cors.allow-origin: "*"
+
 ```
 
-### 5、获取容器日志
+### 5、启动过程中可能遇到报错：
+
+he `vm.max_map_count` kernel setting must be set to at least `262144` for production use.
+
+解决方案：
+
+1、临时修改系统配置，执行命令：
+`sysctl -w vm.max_map_count=262144`
+
+在 /etc/sysctl.conf 文件最后添加如下配置可使永久生效
+`vm.max_map_count=262144`
+
+### 6、检查集群状态
+
+```
+curl -X GET "localhost:9200/_cat/nodes?v=true&pretty"
+```
+
+### 7、获取容器日志
 
 ```
 docker logs -f elasticsearch
@@ -1002,7 +1029,10 @@ kibana.yml 配置文件示例：
 server.name: kibana
 server.host: 172.19.0.3
 server.port: 5601
-elasticsearch.hosts: [ "http://172.19.0.11:9200", "http://172.19.0.12:9200", "http://172.19.0.13:9200"]
+elasticsearch.hosts:
+  - 172.19.0.11
+  - 172.19.0.12
+  - 172.19.0.13
 i18n.locale: zh-CN
 ```
 
@@ -1094,7 +1124,7 @@ filter{}
 
 output {
     elasticsearch {
-      hosts => ["172.19.0.2:9200"]
+      hosts => ["172.19.0.11:9200"]
       index => "logstash-%{type}-%{+yyyy.MM.dd}"
     }
 }
@@ -1157,7 +1187,10 @@ filebeat.inputs:
     - /logs/messages
 
 output.elasticsearch:
-  hosts: '172.19.0.2:9200'
+  hosts:
+    - 172.19.0.11
+    - 172.19.0.12
+    - 172.19.0.13
   indices:
     - index: "elk-system-log-%{+yyyy.MM.dd}"
 ```
