@@ -813,6 +813,33 @@ docker logs -f portainer
 docker pull docker.elastic.co/elasticsearch/elasticsearch:7.11.2
 ```
 
+* 安装 ik 中文分词器
+
+  下载地址： https://github.com/medcl/elasticsearch-analysis-ik/tags
+
+  通过解压后打包成镜像的方式安装：
+
+  1、编写 Dockerfile 文件
+
+  ```
+  FROM docker.elastic.co/elasticsearch/elasticsearch:7.11.2
+  ADD elasticsearch-analysis-ik-7.11.2 /usr/share/elasticsearch/plugins/elasticsearch-analysis-ik-7.11.2
+  ```
+
+  2、构建镜像 `docker build -t elasticsearch-ik:7.11.2 .`
+
+  后续以此镜像启动容器
+
+  3、测试插件（需要 es 部署成功后）
+
+  ```
+  GET _analyze
+  {
+  "analyzer": "ik_smart",
+  "text": ["您词典中包含的词"]
+  }
+  ```
+
 ### 2、创建用户定义的网络
 
 （可用于连接到同一网络的其他服务（例如 Kibana））
