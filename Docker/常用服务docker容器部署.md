@@ -1062,7 +1062,7 @@ Logstash 可以快速启动并连接到本地 Elasticsearch 容器
 docker run --detach \
   --hostname logstash.example.org \
   --net elastic-network \
-  --publish 5044:5044 --publish 9600:9600 \
+  --publish 5047:5047 --publish 5048:5048 --publish 9600:9600 \
   --name logstash \
   --restart always \
   --link elasticsearch:elasticsearch \
