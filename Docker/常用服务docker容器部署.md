@@ -1030,9 +1030,9 @@ server.name: kibana
 server.host: 172.19.0.3
 server.port: 5601
 elasticsearch.hosts:
-  - 172.19.0.11
-  - 172.19.0.12
-  - 172.19.0.13
+  - http://elasticsearch:9200
+  - http://elasticsearch2:9200
+  - http://elasticsearch3:9200
 i18n.locale: zh-CN
 ```
 
@@ -1124,7 +1124,7 @@ filter{}
 
 output {
     elasticsearch {
-      hosts => ["172.19.0.11:9200"]
+      hosts => ["elasticsearch:9200", "elasticsearch2:9200", "elasticsearch3:9200"]
       index => "logstash-%{type}-%{+yyyy.MM.dd}"
     }
 }
