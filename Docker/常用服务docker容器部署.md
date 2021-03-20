@@ -553,7 +553,7 @@ docker run --detach \
 ### 1、获取 nginx 镜像
 
 ```
-docker pull nginx:1.19.5
+docker pull nginx:1.19.8
 ```
 
 ### 2、启动 nginx 容器
@@ -568,7 +568,7 @@ docker run --detach \
   --restart always \
   --volume nginx_content:/usr/share/nginx/html:ro \
   --volume nginx_conf:/etc/nginx \
-  nginx:1.19.5
+  nginx:1.19.8
 ```
 
 ### 3、获取容器日志
@@ -917,7 +917,7 @@ http.cors.allow-origin: "*"
 
 ### 5、启动过程中可能遇到报错：
 
-he `vm.max_map_count` kernel setting must be set to at least `262144` for production use.
+the `vm.max_map_count` kernel setting must be set to at least `262144` for production use.
 
 解决方案：
 
@@ -1151,7 +1151,7 @@ filter{}
 
 output {
     elasticsearch {
-      hosts => ["elasticsearch:9200", "elasticsearch2:9200", "elasticsearch3:9200"]
+      hosts => ["http://elasticsearch:9200", "http://elasticsearch2:9200", "http://elasticsearch3:9200"]
       index => "logstash-%{type}-%{+yyyy.MM.dd}"
     }
 }
@@ -1208,10 +1208,10 @@ filebeat.yml 配置文件示例：例如采集系统日志（需要先把 /var/l
 
 ```
 filebeat.inputs:
-- type: log
-  enabled: true
-  paths:
-    - /logs/messages
+  - type: log
+    enabled: true
+    paths:
+      - /logs/messages
 
 output.elasticsearch:
   hosts:
