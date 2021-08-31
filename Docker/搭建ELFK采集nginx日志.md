@@ -193,6 +193,7 @@ docker run --detach \
 ```
 
 ## logstash 搭建
+*使用 grok 解析 nginx 日志*
 
 logstash.conf
 
@@ -280,7 +281,7 @@ filebeat.inputs:
     backoff: 1s
     max_backoff: 10s
     paths:
-      - /nginx_logs/access.log
+      - /logs/nginx/access.log
     fields:
       type: nginx_access
     fields_under_root: true
@@ -291,7 +292,7 @@ filebeat.inputs:
     backoff: 1s
     max_backoff: 10s
     paths:
-        - /nginx_logs/error.log
+        - /logs/nginx/error.log
     fields:
       type: nginx_error
     fields_under_root: true
@@ -301,6 +302,7 @@ output.logstash:
 ```
 
 基于上面的 filebeat.yml 配置启动容器
+*挂载 nginx 日志储存卷到 filebeat 容器 --volume="nginx_logs:/logs/nginx"*
 
 ```
 docker run --detach \

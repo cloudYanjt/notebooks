@@ -1,4 +1,4 @@
-# linux网络配置
+# CentOS网络配置
 
 网卡的配置在：/etc/sysconfig/network-scripts/下，配置文件：ifcfg-网卡名。
 网络配置参考文件 /usr/share/doc/initscripts-.../sysconfig.txt

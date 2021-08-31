@@ -1,5 +1,12 @@
 # CentOS 下安装 Docker
 
+不管是在 Ubuntu 或 CentOS 都只需要执行下面指令就会自动安装最新版 Docker。
+`curl -fsSL "https://get.docker.com/" | sh`
+*国内下载慢可以指定阿里源*
+`curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun`
+
+**下面是 CentOS 系统手动安装过程：**
+
 ## 1、查看内核版本
 
 目前，Docker 运行在 CentOS 7 上，要求系统为64位、系统内核版本为 3.10 以上。
@@ -44,13 +51,6 @@ sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/cen
 ```shell
 sudo yum  install docker-ce
 ```
-
-### 6.1 或者 ...
-
-不管是在 Ubuntu 或 CentOS 都只需要执行下面指令就会自动安装最新版 Docker。
-`curl -fsSL "https://get.docker.com/" | sh`
-*国内下载慢可以指定阿里源*
-`curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun`
 
 ## 7、启动 Docker 后台服务
 

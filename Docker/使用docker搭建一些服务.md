@@ -9,7 +9,6 @@ docker pull jgraph/drawio:latest
 
 ```
 docker run --detach \
-  --hostname draw.example.com \
   --publish 8080:8080 --publish 8443:8443 \
   --name draw \
   --restart always \
@@ -34,7 +33,6 @@ docker pull flexo3001/asciiflow2:latest
 
 ```
 docker run --detach \
-  --hostname asciiflow2.example.com \
   --publish 80:80 \
   --name asciiflow2 \
   --restart always \
@@ -59,7 +57,6 @@ docker pull excalidraw/excalidraw:latest
 
 ```
 docker run --detach \
-  --hostname excalidraw.example.com \
   --publish 80:80 \
   --name excalidraw \
   --restart always \
@@ -91,7 +88,6 @@ export GITLAB_HOME=/host/path/gitlab
 
 ```
 docker run --detach \
-  --hostname gitlab.example.com \
   --publish 443:443 --publish 80:80 --publish 22:22 \
   --name gitlab \
   --restart always \
@@ -126,7 +122,6 @@ chown -R 200 /host/path/nexus-data
 
 ```
 docker run --detach \
-  --hostname nexus.example.com \
   --publish 8081:8081 \
   --name nexus \
   --restart always \
@@ -161,7 +156,6 @@ docker pull sonarqube:7.9.5-community
 
 ```
 docker run --detach \
-  --hostname sonarqube.example.com \
   --publish 9000:9000 \
   --name sonarqube \
   --restart always \
@@ -205,7 +199,6 @@ docker pull wordpress:php7.4
 
 ```
 docker run --detach \
-  --hostname wordpress.example.com \
   --publish 8080:80 \
   --name wordpress \
   --restart always \
@@ -231,7 +224,6 @@ docker pull registry:2.7.1
 
 ```
 docker run --detach \
-  --hostname registry.example.com \
   --publish 5000:5000 \
   --name registry \
   --restart always \
@@ -257,7 +249,6 @@ docker pull mariadb:10.5.9
 
 ```
 docker run --detach \
-  --hostname mariadb.example.com \
   --publish 3306:3306 \
   --name mariadb \
   --restart always \
@@ -309,7 +300,6 @@ docker pull mysql:5.7.32
 
 ```
 docker run --detach \
-  --hostname mysql.example.com \
   --publish 3306:3306 --publish 33060:33060 \
   --name mysql \
   --restart always \
@@ -361,7 +351,6 @@ docker pull postgres:9.6.20
 
 ```
 docker run --detach \
-  --hostname postgresql.example.com \
   --publish 5432:5432 \
   --name postgresql \
   --restart always \
@@ -396,13 +385,12 @@ docker pull redis:latest
 
 ```
 docker run --detach \
-  --hostname redis.example.com \
   --publish 6379:6379 \
   --name redis \
   --restart always \
   --volume redis_data:/data \
   redis:latest \
-  redis-server --appendonly yes
+  redis-server --appendonly yes --requirepass "123456"
 ```
 
 ### 3、获取容器日志
@@ -442,7 +430,6 @@ docker pull edisinsight:latest
 
 ```
 docker run --detach \
-  --hostname edisinsight.example.com \
   --publish 8001:8001 \
   --name edisinsight \
   --restart always \
@@ -468,7 +455,6 @@ docker pull mongo:4.4.2
 
 ```
 docker run --detach \
-  --hostname mongo.example.com \
   --publish 27017:27017 \
   --name mongo \
   --restart always \
@@ -511,7 +497,6 @@ docker pull rabbitmq:3.8.9
 
 ```
 docker run --detach \
-  --hostname rabbitmq.example.com \
   --publish 4369:4369 --publish 5671:5671 \
   --publish 5672:5672 --publish 15691:15691 \
   --publish 15692:15692 --publish 25672:25672 \
@@ -533,7 +518,6 @@ docker logs -f rabbitmq
 docker pull rabbitmq:3.8.9-management
 
 docker run --detach \
-  --hostname rabbitmq.example.com \
   --publish 4369:4369 --publish 5671:5671 \
   --publish 5672:5672 --publish 15691:15691 \
   --publish 15692:15692 --publish 25672:25672 \
@@ -562,7 +546,6 @@ docker pull nginx:1.19.8
 
 ```
 docker run --detach \
-  --hostname nginx.example.com \
   --publish 80:80 \
   --name nginx \
   --restart always \
@@ -591,7 +574,6 @@ docker pull httpd:2.4
 
 ```
 docker run --detach \
-  --hostname httpd.example.com \
   --publish 80:80 \
   --name httpd \
   --restart always \
@@ -617,7 +599,6 @@ docker pull zookeeper:3.6.2
 
 ```
 docker run --detach \
-  --hostname zookeeper.example.com \
   --publish 2181:2181 --publish 2888:2888 \
   --publish 3888:3888 --publish 8080:8080 \
   --name zookeeper \
@@ -646,7 +627,6 @@ docker pull wurstmeister/kafka:2.12-2.5.0
 
 ```
 docker run --detach \
-  --hostname kafka.example.com \
   -p 9092:9092 \
   --name kafka \
   --restart always \
@@ -654,7 +634,7 @@ docker run --detach \
   -e KAFKA_ZOOKEEPER_CONNECT=192.168.111.130:2181/kafka \
   -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.111.130:9092 \
   -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \
-  -v kafka:/kafka \
+  -e KAFKA_PORT=9092 \
   -v /etc/localtime:/etc/localtime \
   wurstmeister/kafka:2.12-2.5.0
 ```
@@ -683,7 +663,6 @@ docker pull hlebalbau/kafka-manager:3.0.0.5
 
 ```
 docker run --detach \
-  --hostname kafkamanager.example.com \
   -p 9000:9000 \
   --name kafka-manager \
   --restart always \
@@ -736,7 +715,6 @@ fi
 
 ```
 docker run --detach \
-  --hostname jumpserver.example.org \
   --publish  80:80 --publish  2222:2222 \
   --name jms_all \
   --restart always \
@@ -789,7 +767,6 @@ docker pull portainer/portainer-ce:2.0.0
 
 ```
 docker run --detach \
-  --hostname portainer.example.com \
   --publish 9000:9000 --publish 8000:8000 \
   --name portainer \
   --restart always \
@@ -858,7 +835,6 @@ docker network create --subnet=172.19.0.0/16 elastic-network
 
 ```
 docker run --detach \
-  --hostname elasticsearch.example.org \
   --net elastic-network \
   --publish 9200:9200 --publish 9300:9300 \
   --name elasticsearch \
@@ -872,7 +848,6 @@ docker run --detach \
 
 ```
 docker run --detach \
-  --hostname elasticsearch.virtual.org \
   --net elastic-network \
   --ip 172.19.0.11 \
   --publish 9200:9200 --publish 9300:9300 \
@@ -1041,7 +1016,6 @@ Kibana 可以快速启动并连接到本地 Elasticsearch 容器
 
 ```
 docker run --detach \
-  --hostname kibana.example.org \
   --net elastic-network \
   --publish 5601:5601 \
   --name kibana \
@@ -1117,7 +1091,6 @@ Logstash 可以快速启动并连接到本地 Elasticsearch 容器
 
 ```
 docker run --detach \
-  --hostname logstash.example.org \
   --net elastic-network \
   --publish 5047:5047 --publish 5048:5048 --publish 9600:9600 \
   --name logstash \
@@ -1194,7 +1167,6 @@ docker network create --subnet=172.19.0.0/16 elastic-network
 
 ```
 docker run --detach \
-  --hostname filebeat.example.org \
   --net elastic-network \
   --name filebeat \
   --restart always \

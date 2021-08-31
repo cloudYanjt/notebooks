@@ -59,26 +59,6 @@ Dubbo 是阿里巴巴开源的基于 Java 的高性能 RPC（一种远程调用�
     <version>2.7.3</version>
 </dependency>
 
-<dependency>
-    <groupId>org.apache.dubbo</groupId>
-    <artifactId>dubbo</artifactId>
-    <version>2.7.3</version>
-    <exclusions>
-        <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring</artifactId>
-        </exclusion>
-        <exclusion>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-        </exclusion>
-        <exclusion>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
-
 <!-- Zookeeper dependencies -->
 <dependency>
     <groupId>org.apache.dubbo</groupId>
@@ -153,26 +133,6 @@ dubbo:
     <groupId>org.apache.dubbo</groupId>
     <artifactId>dubbo-spring-boot-starter</artifactId>
     <version>2.7.3</version>
-</dependency>
-
-<dependency>
-    <groupId>org.apache.dubbo</groupId>
-    <artifactId>dubbo</artifactId>
-    <version>2.7.3</version>
-    <exclusions>
-        <exclusion>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring</artifactId>
-        </exclusion>
-        <exclusion>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-        </exclusion>
-        <exclusion>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </exclusion>
-    </exclusions>
 </dependency>
 
 <!-- Zookeeper dependencies -->
