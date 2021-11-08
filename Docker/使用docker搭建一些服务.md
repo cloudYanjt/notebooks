@@ -1011,7 +1011,7 @@ docker network create --subnet=172.19.0.0/16 elastic-network
 
 Kibana 可以快速启动并连接到本地 Elasticsearch 容器
 (`--link YOUR_ELASTICSEARCH_CONTAINER_NAME_OR_ID:elasticsearch`)
-或者指定环境变量 `-e "elasticsearch.hosts=http://elasticsearch_url:9200"`
+或者指定环境变量 `-e "ELASTICSEARCH_HOSTS=http://elasticsearch_url:9200"`
 可以使用 `--volume="$(pwd)/kibana.yml:/usr/share/kibana/config/kibana.yml:ro"` 指定映射配置文件
 
 ```
